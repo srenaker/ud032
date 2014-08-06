@@ -37,11 +37,20 @@ def get_from_file(kind, period):
 def article_overview(kind, period):
     data = get_from_file(kind, period)
     titles = []
-    urls =[]
+    urls = []
     # YOUR CODE HERE
+    for d in data:
+        entry = {}
+        entry[d['section']] = d['title']
+        titles.append(entry) 
+
+        if type(d['media']) == list:
+            for elems in d['media']:
+                for e in elems['media-metadata']:
+                    if e['format'] == 'Standard Thumbnail':
+                        urls.append(e['url'])
 
     return (titles, urls)
-
 
 def query_site(url, target, offset):
     # This will set up the query with the API key and offset
