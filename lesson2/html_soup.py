@@ -19,7 +19,7 @@ def extract_data(page):
     with open(page, "r") as html:
         # do something here to find the necessary values
         soup = BeautifulSoup(html)
-        a = soup.findAll('input')
+        a = soup.find_all('input', attrs={'name':'__EVENTVALIDATION', 'type':'hidden'})
 
         print a
     return data
